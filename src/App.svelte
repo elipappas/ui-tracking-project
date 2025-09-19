@@ -30,6 +30,7 @@
   function selectDay(day) {
     selectedDay = day;
   }
+  
   // User info and PRs
   let userName = "Eli";
   let benchPR = 0;
