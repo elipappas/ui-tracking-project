@@ -1,4 +1,3 @@
-
 html, body {
   width: 100vw;
   height: 100vh;
@@ -8,6 +7,13 @@ html, body {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   background: #222;
   color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light mode overrides for html/body */
+body.light-mode {
+  background: #f5f5f5;
+  color: #333;
 }
 
 main {
@@ -19,6 +25,13 @@ main {
   align-items: stretch;
   justify-content: stretch;
   background: #222;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light mode for main */
+main.light-mode {
+  background: #f5f5f5;
+  color: #333;
 }
 
 .grid-container {
@@ -35,6 +48,13 @@ main {
   color: #fff;
   box-sizing: border-box;
   align-items: start;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light mode for grid container */
+.light-mode .grid-container {
+  background: #f5f5f5;
+  color: #333;
 }
 
 .grid-greeting {
@@ -44,34 +64,89 @@ main {
   min-width: 0;
   height: 20%;
 }
-.date-time {
+
+/* Settings panel */
+.settings-panel {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.settings-btn {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.settings-btn:hover {
+  background: #357abd;
+  transform: translateY(-1px);
+}
+
+/* Light mode settings buttons */
+.light-mode .settings-btn {
+  background: #4a90e2;
+  color: white;
+}
+
+.light-mode .settings-btn:hover {
+  background: #357abd;
+}
+
+.date-time, .days-since, .days-tracked {
   margin-top: 0.5em;
   font-size: 1.1em;
   color: #ffd700;
 }
+
+.light-mode .date-time, .light-mode .days-since, .light-mode .days-tracked {
+  margin-top: 0.5em;
+  font-size: 1.1em;
+  color: #ff7b00;
+}
+
 .grid-pr-display {
   grid-column: 2;
   grid-row: 1 / span 2;
   align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   background: #2a2a2a;
   border-radius: 12px;
   padding: 2vw 1vw;
   min-width: 0;
   height: 90%;
+  transition: background-color 0.3s;
 }
+
+/* Light mode for PR display */
+.light-mode .grid-pr-display {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
 .pr-svg-row {
   display: flex;
   justify-content: center;
   gap: 2em;
   margin-top: 1em;
 }
-.pr-svg {
+
+.pr-svg-bench, .pr-svg-squat, .pr-svg-deadlift {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5em;
 }
+
 .grid-lift-input {
   grid-column: 1;
   grid-row: 2;
@@ -81,11 +156,21 @@ main {
   padding: 2vw 1vw;
   min-width: 0;
   height: 86%;
+  transition: background-color 0.3s;
 }
+
+/* Light mode for lift input */
+.light-mode .grid-lift-input {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
 .lift-form label {
   display: block;
   margin-bottom: 1em;
 }
+
 .lift-form input, .lift-form select {
   margin-left: 0.5em;
   padding: 0.3em 0.6em;
@@ -94,7 +179,17 @@ main {
   background: #fff;
   color: #222;
   font-size: 1em;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
+
+/* Light mode for form inputs */
+.light-mode .lift-form input,
+.light-mode .lift-form select {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
 .lift-form button {
   margin-top: 1em;
   padding: 0.6em 1.2em;
@@ -107,9 +202,21 @@ main {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: background 0.2s;
 }
+
 .lift-form button:hover {
   background: #357abd;
 }
+
+/* Light mode for form buttons */
+.light-mode .lift-form button {
+  background: #4a90e2;
+  color: white;
+}
+
+.light-mode .lift-form button:hover {
+  background: #357abd;
+}
+
 .save-message {
   margin-top: 1em;
   color: #4caf50;
@@ -118,6 +225,59 @@ main {
   border-radius: 6px;
   padding: 0.5em 1em;
   display: inline-block;
+  transition: background-color 0.3s;
+}
+
+/* Light mode for save message */
+.light-mode .save-message {
+  background: #f8f9fa;
+  color: #27ae60;
+  border: 1px solid #e0e0e0;
+}
+
+/* Simple mode styles */
+.simple-form {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.simple-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+.simple-checkbox input[type="checkbox"] {
+  transform: scale(1.5);
+}
+
+.simple-submit {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.simple-submit:hover {
+  background: #357abd;
+  transform: translateY(-2px);
+}
+
+/* Light mode for simple submit */
+.light-mode .simple-submit {
+  background: #4a90e2;
+  color: white;
+}
+
+.light-mode .simple-submit:hover {
+  background: #357abd;
 }
 
 @media (max-width: 900px) {
@@ -138,4 +298,213 @@ main {
     grid-row: 3;
     margin-top: 1em;
   }
+  .settings-panel {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.calendar {
+  margin: 2rem auto;
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 350px;
+  width: 100%;
+  text-align: center;
+  align-self: center;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+}
+
+.nav-button {
+  background: #4a90e2;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.nav-button:hover {
+  background: #357abd;
+  transform: scale(1.1);
+}
+
+.nav-button:active {
+  transform: scale(0.95);
+}
+
+.month-title {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  margin: 0;
+  font-size: 1.2rem;
+  text-align: center;
+  flex: 1;
+}
+
+.month-title:hover {
+  background-color: #3a3a3a;
+}
+
+/* Light mode for month title hover */
+.light-mode .month-title:hover {
+  background-color: #f0f0f0;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #ccc;
+  font-weight: bold;
+}
+
+.light-mode .calendar-weekdays {
+  color: #666;
+}
+
+.calendar-weekdays span {
+  padding: 0.5rem 0;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 1rem;
+}
+
+.calendar-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: #2a2a2a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  min-height: 50px;
+  position: relative;
+}
+
+/* Light mode for calendar days */
+.light-mode .calendar-day {
+  background: #fff;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.calendar-day:hover {
+  background-color: #3a3a3a;
+  transform: scale(1.05);
+}
+
+/* Light mode for calendar day hover */
+.light-mode .calendar-day:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.calendar-day.selected {
+  background-color: #4a90e2;
+  color: white;
+}
+
+/* Light mode for selected calendar day */
+.light-mode .calendar-day.selected {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.calendar-day svg {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+}
+
+.calendar-details {
+  margin-top: 1rem;
+  font-size: 0.95em;
+  background: #222;
+  border-radius: 4px;
+  padding: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+/* Light mode for calendar details */
+.light-mode .calendar-details {
+  background: #f8f9fa;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+/* Simple mode calendar styles */
+.simple-calendar {
+  margin-top: 2rem;
+}
+
+.simple-grid {
+  gap: 4px;
+}
+
+.simple-day {
+  min-height: 40px;
+  font-size: 0.9rem;
+}
+
+.simple-indicator {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 2px;
+}
+
+.simple-indicator.lifted {
+  color: #27ae60;
+}
+
+.simple-indicator.not-lifted {
+  color: #e74c3c;
+}
+
+.simple-details {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+.simple-details {
+  background: #333;
+}
+
+.light-mode .simple-details {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.pr-svg-links {
+  all: unset;
+  cursor: pointer;
+  width: 50%;
+  padding-bottom: 2rem;
 }
