@@ -18,9 +18,29 @@
   // User info and PRs
   let userName = "Eli";
   let startDate = new Date("2025-09-01");
+
   let benchPR = 225;
   let squatPR = 265;
   let deadliftPR = 315;
+
+  let goalBench = 275;
+  let goalSquat = 315;
+  let goalDeadlift = 365;
+  let showGoalEditor = false;
+
+  function toggleGoalEditor() {
+    showGoalEditor = !showGoalEditor;
+  }
+
+  function saveGoals() {
+    showGoalEditor = false;
+    // You could save these to localStorage or a database here
+  }
+
+  // Calculate progress towards goals
+  $: benchProgress = benchPR && goalBench ? Math.min((benchPR / goalBench) * 100, 100) : 0;
+  $: squatProgress = squatPR && goalSquat ? Math.min((squatPR / goalSquat) * 100, 100) : 0;
+  $: deadliftProgress = deadliftPR && goalDeadlift ? Math.min((deadliftPR / goalDeadlift) * 100, 100) : 0;
 
   const exerciseOptions = {
     Push: ["Bench Press", "Shoulder Press", "Lateral Raises", "Triceps Extension", "Dips"],
@@ -247,7 +267,7 @@
 
 <main class:dark-mode={isDarkMode} class:light-mode={!isDarkMode}>
   {#if currentPage === 'pr-graphs'}
-    <PRGraphs {days} {userName} {benchPR} {squatPR} {deadliftPR} {isDarkMode}/>
+    <PRGraphs {days} {userName} {benchPR} {squatPR} {deadliftPR} {isDarkMode} {goalBench} {goalSquat} {goalDeadlift}/>
   {:else}
     <div class="grid-container">
     <!-- Top left: Greeting -->
@@ -263,35 +283,128 @@
         <button class="settings-btn" on:click={toggleSimpleMode}>
           {isSimpleMode ? '📊' : '📝'} {isSimpleMode ? 'Detailed' : 'Simple'} View
         </button>
+        <button class="settings-btn" on:click={toggleGoalEditor}>
+          🎯 {showGoalEditor ? 'Close' : 'Set Goals'}
+        </button>
       </div>
     </div>
 
     <!-- Top right: SVG PR display -->
     <div class="grid-pr-display">
+      {#if showGoalEditor}
+        <!-- ADD THIS GOAL EDITOR SECTION -->
+        <div class="goal-editor">
+          <h2>Set Your PR Goals</h2>
+          <div class="goal-inputs">
+            <label>
+              Bench Press Goal (lbs): 
+              <input type="number" bind:value={goalBench} min="0" max="1000">
+              <br/>
+            </label>
+            <label>
+              Squat Goal (lbs):
+              <input type="number" bind:value={goalSquat} min="0" max="1000">
+              <br/>
+            </label>
+            <label>
+              Deadlift Goal (lbs):
+              <input type="number" bind:value={goalDeadlift} min="0" max="1000">
+              <br/>
+            </label>
+          </div>
+          <div class="goal-actions">
+            <button class="save-goals-btn" on:click={saveGoals}>Save Goals</button>
+            <button class="cancel-goals-btn" on:click={toggleGoalEditor}>Cancel</button>
+          </div>
+        </div>
+      {:else}
       <a href="#pr-graphs" class="pr-svg-links">
         <h2>Max PRs</h2>
         <div class="pr-svg-row">
           <div class="pr-svg-bench">
-            <svg width="60" height="60">
-              <circle cx="30" cy="30" r="28" fill="#e74c3c" stroke="#fff" stroke-width="2" />
-              <text x="30" y="36" text-anchor="middle" fill="#fff" font-size="18">{benchPR || 0}</text>
-            </svg>
-            <strong>Bench</strong>
-          </div>
+              <div class="pr-circle-container">
+                <svg width="80" height="80">
+                  <!-- Background circle -->
+                  <circle cx="40" cy="40" r="35" fill="none" stroke="#444" stroke-width="4" />
+                  <!-- Progress circle -->
+                  <circle 
+                    cx="40" 
+                    cy="40" 
+                    r="35" 
+                    fill="none" 
+                    stroke="#e74c3c" 
+                    stroke-width="4"
+                    stroke-dasharray={`${2 * Math.PI * 35}`}
+                    stroke-dashoffset={`${2 * Math.PI * 35 * (1 - benchProgress / 100)}`}
+                    transform="rotate(-90 40 40)"
+                    class="progress-circle"
+                  />
+                  <!-- Inner circle with PR -->
+                  <circle cx="40" cy="40" r="28" fill="#e74c3c" stroke="#fff" stroke-width="2" />
+                  <text x="40" y="46" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">{benchPR || 0}</text>
+                </svg>
+              </div>
+              <div class="pr-info">
+                <strong>Bench</strong>
+                <span class="goal-text">Goal: {goalBench}</span>
+              </div>
+            </div>
           <div class="pr-svg-squat">
-            <svg width="60" height="60">
-              <circle cx="30" cy="30" r="28" fill="#3498db" stroke="#fff" stroke-width="2" />
-              <text x="30" y="36" text-anchor="middle" fill="#fff" font-size="18">{squatPR || 0}</text>
-            </svg>
-            <strong>Squat</strong>
-          </div>
-          <div class="pr-svg-deadlift">
-            <svg width="60" height="60">
-              <circle cx="30" cy="30" r="28" fill="#27ae60" stroke="#fff" stroke-width="2" />
-              <text x="30" y="36" text-anchor="middle" fill="#fff" font-size="18">{deadliftPR || 0}</text>
-            </svg>
-            <strong>Deadlift</strong>
-          </div>
+              <div class="pr-circle-container">
+                <svg width="80" height="80">
+                  <!-- Background circle -->
+                  <circle cx="40" cy="40" r="35" fill="none" stroke="#444" stroke-width="4" />
+                  <!-- Progress circle -->
+                  <circle 
+                    cx="40" 
+                    cy="40" 
+                    r="35" 
+                    fill="none" 
+                    stroke="#3498db" 
+                    stroke-width="4"
+                    stroke-dasharray={`${2 * Math.PI * 35}`}
+                    stroke-dashoffset={`${2 * Math.PI * 35 * (1 - squatProgress / 100)}`}
+                    transform="rotate(-90 40 40)"
+                    class="progress-circle"
+                  />
+                  <!-- Inner circle with PR -->
+                  <circle cx="40" cy="40" r="28" fill="#3498db" stroke="#fff" stroke-width="2" />
+                  <text x="40" y="46" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">{squatPR || 0}</text>
+                </svg>
+              </div>
+              <div class="pr-info">
+                <strong>Squat</strong>
+                <span class="goal-text">Goal: {goalSquat}</span>
+              </div>
+            </div>
+            <div class="pr-svg-deadlift">
+              <div class="pr-circle-container">
+                <svg width="80" height="80">
+                  <!-- Background circle -->
+                  <circle cx="40" cy="40" r="35" fill="none" stroke="#444" stroke-width="4" />
+                  <!-- Progress circle -->
+                  <circle 
+                    cx="40" 
+                    cy="40" 
+                    r="35" 
+                    fill="none" 
+                    stroke="#27ae60" 
+                    stroke-width="4"
+                    stroke-dasharray={`${2 * Math.PI * 35}`}
+                    stroke-dashoffset={`${2 * Math.PI * 35 * (1 - deadliftProgress / 100)}`}
+                    transform="rotate(-90 40 40)"
+                    class="progress-circle"
+                  />
+                  <!-- Inner circle with PR -->
+                  <circle cx="40" cy="40" r="28" fill="#27ae60" stroke="#fff" stroke-width="2" />
+                  <text x="40" y="46" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">{deadliftPR || 0}</text>
+                </svg>
+              </div>
+              <div class="pr-info">
+                <strong>Deadlift</strong>
+                <span class="goal-text">Goal: {goalDeadlift}</span>
+              </div>
+            </div>
         </div>
       </a>
 
@@ -373,6 +486,7 @@
           {/if}
         </div>
       </div>
+      {/if}
     </div>
 
     <!-- Bottom left: Lift input, exercise group, weight input -->
