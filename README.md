@@ -66,9 +66,15 @@ At the bottom of this page, I added a detailed progress section which shows your
 
 ## Implementation Details
 
+The code to this project is honestly not formatted great, but I have variables for various global constants which are used and passed between pages, such as userName, startDate, benchPR, squatPR, deadliftPR, goalBench, goalSquat, goalDeadlift, showGoalEditor, isDarkMode, etc. Then I use functions which are called from the code to modify these variables and use their values to determiine what to do. One such simple example is toggleGoalEditor which inverts the value of showGoalEditor when the matching button is pushed. I have a lot of functions like this. There is also another main driving function which is handleSubmit that is used to update and trigger a lot of these other functions whenever a value is updated, such as needing to update the max PR or the values within an old date or current date. The code for the calendar is also quite complex and has multiple functions associated, such as getDaysInMonth, findEntry, goToPreviousMonth, goToNextMonth, selectDay, and goToCurrentMonth. Finally is the data storage which is in days, and is an array of objects.
+
 ## Use of AI
 
+I did use AI quite a bit when creating this website. I tried to limit it to getting a boiler plate for the project, receiving help when I was stumped or didn't know where to start, debugging issues I ran into, creating the circle svg's and the rings around them, and cleaning up css so that it worked well together. AI is something that's hard to get around as with copilot it often autofinishes lines or even predicts what you are trying to make, so there may be a bit more than just that, but I would honestly like to ease off on AI use in the future and possibly even disable it when trying to learn to avoid that.
+
 ## Future Work
+
+If I were to continue working on this site, the first thing I would do is incorporate a backend so user data is persistent. I would also like to move the toggle buttons like simple mode or dark mode under a settings wheel. I would also make filters possible for the PR graph so you can look at one exercise at a time and also include the data from the other exercises not included in PR. Another thing I would do is let people track multiple exercises a day instead of just the main one. The form to update and log a day also could look better as it is quite simple looking now. Along with that I would also add the ability to remove items from the "Form" for logging so you only have to log what you want.
 
 ## Demo Video
 
