@@ -4,6 +4,7 @@ This project is based around a website which can be used to track lifting goals 
 
 ## Design Work
 Interview Results:
+
 Q: What metrics are most important to you when it comes to gym progress?
 A: the general concensus was that they were looking to see the increase over time of their weights as that is a very easy to see metric.
 
