@@ -23,10 +23,14 @@ From these interviews I gathered the idea of keeping the app as simple as possib
 Sketches:
 [ui_sketches.pdf](https://github.com/user-attachments/files/22473404/ui_sketches.pdf)
 
-Feedback:
+Feedback: On my feedback I talked to a few people and we agreed that the calendar was a great idea as we could show day by day how consistent you've been at the gym, they also liked the progress bars and pr summary in the top right as its very obvious. They also really liked the bar idea with weights increasing with your pr, but I decided that would take too much time and I wouldn't be able to hit my other goals.
 
 
 ## Interface Details
+Now to break into the interface. In the top left we display the user's name, the current date, the days they've tracked, and the length since they tracked their first day. I also put the buttons for some settings in the top right as well. There is the light mode/dark mode button to toggle coloring, the simple view/detailed view button which simplifies the inputs down to just whether or not you lifted as well as the past entries will only show a yes or no for whether you lifted that day. Finally there is the goal setting button which you can click to update your goals. The goal setting button will toggle a pane on the right side of the screen with buttons to update them.
+
+For the bottom left 
+
 
 ## Implementation Details
 
