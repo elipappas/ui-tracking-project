@@ -21,6 +21,7 @@ A: neither perrson currently used a tracking app for weight lifting, however one
 From these interviews I gathered the idea of keeping the app as simple as possible which also inspired my simple mode button to keep it at maximum simplicity. I also decided on bench, squat, and deadlift for pr tracking to show gym progress which is prominently displayed on the screen.
 
 Sketches:
+[ui_sketches.pdf](https://github.com/user-attachments/files/22473404/ui_sketches.pdf)
 
 Feedback:
 
