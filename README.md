@@ -78,6 +78,8 @@ If I were to continue working on this site, the first thing I would do is incorp
 
 ## Demo Video
 
+https://github.com/user-attachments/assets/489bce8b-a051-4b78-bb0c-b33a77c47cc2
+
 ## Links
 Code: https://github.com/elipappas/ui-tracking-project/
 Website: https://elipappas.github.io/ui-tracking-project/#home
